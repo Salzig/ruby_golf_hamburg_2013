@@ -47,7 +47,13 @@ module RubyGolf
   #         ending in a \n
   # output: the maximum value found by calculating the sums of all rows and
   #         columns
-  def self.grid_computing(g)
+  def self.grid_computing(g,c=g.lines.map{|l|l.split.map(&:to_i)},d=c.transpose)
+    a,b = gc(c), gc(d)
+    a > b ? a : b
+  end
+
+  def self.gc(g)
+    g.map{|e|e.inject(&:+)}.max
   end
 
 
@@ -59,6 +65,7 @@ module RubyGolf
   # output: a string describing the same hash but without hash rockets, but
   #         otherwise with the same formatting
   def self.reformat_hash(s)
+    s.gsub /\ \=\>/, ':'
   end
 
 
