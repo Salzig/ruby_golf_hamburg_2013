@@ -52,8 +52,8 @@ module RubyGolf
     a > b ? a : b
   end
 
-  def self.gc(g)
-    g.map{|e|e.inject(&:+)}.max
+  def self.gc(g, r=g.map{|e|e.inject(&:+)}.max)
+    r
   end
 
 
@@ -65,7 +65,7 @@ module RubyGolf
   # output: a string describing the same hash but without hash rockets, but
   #         otherwise with the same formatting
   def self.reformat_hash(s)
-    s.gsub /\ \=\>/, ':'
+    #s.gsub(/:(?:\ )/,' ').gsub /\ \=\>/, ':'
   end
 
 
