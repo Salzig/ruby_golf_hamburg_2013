@@ -78,8 +78,18 @@ module RubyGolf
   #           level are prepended by two additional spaces per level away from
   #           the top level
   def self.pretty_hash(h)
+    $stdout.puts "-"*30
+    $stdout.puts h
+    YAML.dump(s(h)).lines[1..-1].join
   end
 
+  def self.s(h)
+    $stdout.puts h
+    h.inject({}) {|a,(k,v)|
+      a[k.to_s] = v.is_a?(Hash) ? s(v) : (v.is_a?(Array) ? v : [v.to_s])
+      a
+    }
+  end
 
   ##############################################################################
   # Hole 7: RubyGolf.word_letter_sum                                           #
