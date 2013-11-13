@@ -7,7 +7,9 @@ module RubyGolf
   # input:  n - numbers string to be x'ed out,
   #         v - number of visible trailing numbers
   # output: x'ed out string
-  def self.x_out_numbers(n, v, s=n.size, x=s-v)
+  def self.x_out_numbers(n, v)
+    s=n.size
+    x=s-v
     v > s ? n : ('x'*x)+n[x..-1]
   end
 
@@ -18,7 +20,8 @@ module RubyGolf
   # input:  an identifier string in camel case notation. i.e. 'SchinkenWurst'
   # ouput:  a 'ruby style' version of the identifier: all lowercase, former case
   #         changes to upper case get a prepended underscore
-  def self.underscore(s,o=s.to_s.split('').map(&:ord))
+  def self.underscore(s)
+    o=s.to_s.split('').map(&:ord)
     s.empty? ? s : [o[0] % 32 + 96, o[1..-1].map{|e| e==45 ? nil : e < 97 ? [95, (e%32+96)] : e }].flatten.compact.map(&:chr).join()
   end
 
@@ -31,8 +34,8 @@ module RubyGolf
   #         The values stay the same except they're hashes too.
   #         Values that are hashes contain only smybols as keys too, this
   #         condition is maintained recursivley
-  def self.symbolize_keys(h, r=h.inject(Hash.new) {|a,(k,v)|a[k.to_sym] = v.is_a?(Hash) ? symbolize_keys(v) : v;a})
-    r
+  def self.symbolize_keys(h)
+    h.inject(Hash.new) {|a,(k,v)|a[k.to_sym] = v.is_a?(Hash) ? symbolize_keys(v) : v;a}
   end
 
 
@@ -43,7 +46,9 @@ module RubyGolf
   #         ending in a \n
   # output: the maximum value found by calculating the sums of all rows and
   #         columns
-  def self.grid_computing(g,c=g.lines.map{|l|l.split.map(&:to_i)},d=c.transpose)
+  def self.grid_computing(g)
+    c=g.lines.map{|l|l.split.map(&:to_i)}
+    d=c.transpose
     a,b = gc(c), gc(d)
     a > b ? a : b
   end
@@ -102,6 +107,11 @@ module RubyGolf
   #           word 1* ...)
   #         * sum all products
   def self.word_letter_sum(s)
+    s.split \
+      .map{ |w|
+        w.split('') \
+          .inject(0) { |a,l| a+=l.ord % 32 }
+      }.inject(:+)
   end
 
 
