@@ -7,10 +7,10 @@ module RubyGolf
   # input:  n - numbers string to be x'ed out,
   #         v - number of visible trailing numbers
   # output: x'ed out string
-  def self.x_out_numbers(n, v)
-    return n if v > n.size
-    x=(n.size-v)
-    ('x'*x)+n[x..n.size]
+  def self.x_out_numbers(n, v, s=n.size)
+    return n if v > s
+    x=(s-v)
+    ('x'*x)+n[x..-1]
   end
 
 
@@ -21,6 +21,7 @@ module RubyGolf
   # ouput:  a 'ruby style' version of the identifier: all lowercase, former case
   #         changes to upper case get a prepended underscore
   def self.underscore(s)
+
   end
 
 
