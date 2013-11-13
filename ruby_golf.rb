@@ -32,11 +32,8 @@ module RubyGolf
   #         The values stay the same except they're hashes too.
   #         Values that are hashes contain only smybols as keys too, this
   #         condition is maintained recursivley
-  def self.symbolize_keys(h)
-    h.inject(Hash.new) {|a,(k,v)|
-      a[k.to_sym] = v.is_a?(Hash) ? symbolize_keys(v) : v
-      a
-    }
+  def self.symbolize_keys(h, r=h.inject(Hash.new) {|a,(k,v)|a[k.to_sym] = v.is_a?(Hash) ? symbolize_keys(v) : v;a})
+    r
   end
 
 
