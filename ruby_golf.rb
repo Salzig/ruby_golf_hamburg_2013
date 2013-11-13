@@ -7,9 +7,8 @@ module RubyGolf
   # input:  n - numbers string to be x'ed out,
   #         v - number of visible trailing numbers
   # output: x'ed out string
-  def self.x_out_numbers(n, v, s=n.size)
+  def self.x_out_numbers(n, v, s=n.size, x=s-v)
     return n if v > s
-    x=(s-v)
     ('x'*x)+n[x..-1]
   end
 
