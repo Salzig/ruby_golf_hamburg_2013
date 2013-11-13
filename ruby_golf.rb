@@ -20,7 +20,6 @@ module RubyGolf
   #         changes to upper case get a prepended underscore
   def self.underscore(s,o=s.to_s.split('').map(&:ord))
     s.empty? ? s : [o[0] % 32 + 96, o[1..-1].map{|e| e==45 ? nil : e < 97 ? [95, (e%32+96)] : e }].flatten.compact.map(&:chr).join()
-    #s.empty? ? s : (s[0].ord % 96 +32).chr + s[1..-1].split('').map(&:ord).map{|e| e.div(96)==0 ? [95, (e+32)] : e }.flatten.map(&:chr).join()
   end
 
 
@@ -62,7 +61,7 @@ module RubyGolf
   # output: a string describing the same hash but without hash rockets, but
   #         otherwise with the same formatting
   def self.reformat_hash(s)
-    #s.gsub(/:(?:\ )/,' ').gsub /\ \=\>/, ':'
+    s.gsub(/:(?:\ )/,' ').gsub /\ \=\>/, ':'
   end
 
 
